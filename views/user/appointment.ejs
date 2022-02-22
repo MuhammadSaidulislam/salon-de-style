@@ -1,0 +1,101 @@
+<%- include('./include/header.ejs') %>
+    <link rel="stylesheet" href="/css/user/css/appoinment.css">
+
+</head>
+
+<body  onload="loader()">
+	<div id="loader"> </div>
+			<!-- Header -->
+			<% if(user){ %>
+			<%- include('./loginNavbar.ejs') %>
+			<% } else{ %>
+			<%- include('./navbar.ejs') %>
+			<% }  %>
+			<!-- Header / End -->
+			<!-- side Navbar -->
+			<%- include('./sideNavbar.ejs') %>
+			<!-- side Navbar -->
+
+			<div class="content">
+				<div class="row">
+					<div class="col-md-12">
+						<h3>Appointment</h3>
+						<hr>
+					</div>
+					<div class="col-md-12">
+						<% if(booking.length) { %>
+							<%  for(let i =0 ; i<booking.length; i++ ){ %>
+						<div class="appointment">
+							<div class="media">
+								<img src="<%=booking[i].img%>" alt="">
+								<div class="media-body">
+									<h5 class=""><%=booking[i].businessName%> <span class=""><%  if(booking[i].status == 0){ %>
+										<span class="badge badge-warning">Pending</span>
+										<% } else if(booking[i].status == 1) { %>
+										<span class="badge badge-info">Approved</span>
+										<% } else if(booking[i].status == -1) { %>
+										<span class="badge badge-danger">Canceled</span>
+										<% } %></span></h5>
+									<p> Booking Service: <%=booking[i].serviceName%> </p>
+									<p> Price: $ <%=booking[i].servicePrice%> </p>
+									<p> Booking Date: <%=booking[i].day%> - (<%=booking[i].timeSlotStart%> - <%=booking[i].timeSlotEnd%>) </p>
+									<p> Address: New york </p>
+									<p> Contact: <%=booking[i].businessMail%> </p>
+								</div>
+								<div class="buttons-to-right">
+									<%  if(booking[i].status == 0){ %>
+	
+									<form action="/delete/appoinment" method="post">
+										<input type="hidden" name="id" value="<%=booking[i].bookingID%>">
+										<input type="hidden" name="shopMail" value="<%=booking[i].businessMail%>">
+										<button type="submit" class="btn btn-danger mb-3">
+											<i class="sl sl-icon-close"></i>Cancel
+										</button>
+									</form>
+	
+									<a class="bg-success p-2 mt-3"
+										href="/details/<%=booking[i].businessName%>/<%=booking[i].businessMail%>"><i
+											class="sl sl-icon-check"></i>Book Again</a>
+									<% } else if(booking[i].status == 1) { %>
+									<form action="/delete/appoinment" method="post">
+										<input type="hidden" name="id" value="<%=booking[i].bookingID%>">
+										<input type="hidden" name="shopMail" value="<%=booking[i].businessMail%>">
+										<button type="submit" class="btn btn-danger mb-3">
+											<i class="sl sl-icon-close"></i>Cancel
+										</button>
+									</form>
+									<a class="bg-success p-2 mt-3"
+										href="/details/<%=booking[i].businessName%>/<%=booking[i].businessMail%>"><i
+											class="sl sl-icon-check"></i>Book Again</a>
+									<% } else if(booking[i].status == -1) { %>
+									<a class="bg-success p-2 mt-3"><i class="sl sl-icon-check"></i>Book Again</a>
+									<% } %>
+	
+								</div>
+							</div>
+						</div>
+						<% } %>
+						<% } else{  %>
+								 
+							<div class="container">
+								<div class="row">
+									<div class="col-12">
+										<h3>No Data Found</h3>
+									</div>
+								</div>
+							</div>
+							<%  } %>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+	<!-- Wrapper / End -->
+
+	<%- include('./include/script.ejs') %>
+</body>
+
+</html>

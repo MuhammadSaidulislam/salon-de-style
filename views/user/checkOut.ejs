@@ -1,0 +1,37 @@
+<%- include('./include/header.ejs') %>
+</head>
+
+<body  onload="loader()">
+	<% if(user){ %>
+        <%- include('./loginNavbar.ejs') %>
+      <% } else{ %>
+        <%- include('./navbar.ejs') %>
+      <% }  %>
+
+<!-- Container -->
+<section class="page-content">
+<section class="confirm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<p class="confirm-sign"><i class="fa fa-check-circle text-success"></i></p>
+				<h2>Thanks for your booking!</h2>
+				<h5>Please check your Payment slip</h5>
+				<form action="/cart" method="post">
+				  <input type="hidden" name="token" value="<%=toekn%>">
+				  <input type="submit" class="btn btn-dangerinvoiceBtn text-light" value="View Invoice">
+			  </form>
+			</div>
+		</div>
+	</div>
+</section>
+</section>
+
+<!-- Container / End -->
+
+<!-- Footer -->
+<%- include('./footer.ejs') %>
+<!-- Footer -->
+
+</body>
+</html>

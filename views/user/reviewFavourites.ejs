@@ -1,0 +1,67 @@
+<%- include('./include/header.ejs') %>
+</head>
+
+<body  onload="loader()">
+	<div id="loader"> </div>
+	<div id="wrapper">
+		<header id="header-container" class="fixed fullwidth dashboard">
+
+			<!-- Header -->
+			<% if(user){ %>
+				<%- include('./loginNavbar.ejs') %>
+			  <% } else{ %>
+				<%- include('./navbar.ejs') %>
+			  <% }  %>
+			<!-- Header / End -->
+			<!-- side Navbar -->
+			<%- include('./sideNavbar.ejs') %>
+			<!-- side Navbar -->
+
+			<div class="content">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Given review</h2>
+						<hr>
+					</div>
+					<div class="col-md-12">
+						<% if(review.length) { %>
+							<%  for(let i =0 ; i<review.length ;i++ ){ %> 
+						<div class="review">
+							<div class="media">
+								<img src="<%=review[i].img%>" alt="" width="50px" height="50px">
+								<div class="media-body">
+									<h5 class="mt-0 mb-1">Your review on <%=review[i].businessName%></h5>
+									<p> <%=review[i].businessName%> </p>
+									<p> <%=review[i].date%> </p>
+									<p> This is a good shop </p>
+								</div>
+								<div class="rating" data-rating="<%=review[i].rating%>">
+									<div class="star"></div>
+									<div class="star"></div>
+									<div class="star"></div>
+									<div class="star"></div>
+									<div class="star"></div>
+								</div>
+							</div>
+						</div>
+						<% } %>
+						<% } else{  %>
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+										<h3 class="text-center">No Data Found</h3>
+									</div>
+								</div>
+							</div>
+							<%  } %>
+					</div>
+				</div>
+			</div>
+
+	<!-- Wrapper / End -->
+
+	<%- include('./include/script.ejs') %>
+
+</body>
+
+</html>

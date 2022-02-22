@@ -1,0 +1,71 @@
+<%- include('./include/header.ejs') %>
+</head>
+
+<body  onload="loader()">
+    <div id="loader"> </div>
+   <% if(user){ %>
+	<%- include('./loginNavbar.ejs') %>
+  <% } else{ %>
+	<%- include('./navbar.ejs') %>
+  <% }  %>
+            <!-- Header / End -->
+            <!-- side Navbar -->
+			<%- include('./sideNavbar.ejs') %>
+			<!-- side Navbar -->
+ 
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>User Information</h3>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6">
+                                    <form action="/updateprofile" enctype="multipart/form-data" method="post">
+                                 <div class="user-half-info">
+                                    <h6>User picture</h6>
+                                    <img src="<%=user.img%>" alt="" width="90%" height="200px">
+                                    <input type="file" name="image" id="myFile" name="filename">
+                                    <h6>User Name</h6>
+                                    <input value="<%=user.name%>" name="name" type="text" class="form-control">
+                                    <h6>User Phone number</h6>
+                                    <input value="<%=user.phone%>" name="phone" type="text" class="form-control">
+                                    <h6>User Email</h6>
+                                    <input value="<%=user.email%>" name="email" readonly type="text" class="form-control">
+                                    <h6>User Notes</h6>
+                                    <input type="text" class="form-control">
+                                    <h6>Facebook</h6>
+                                    <input placeholder="https://www.facebook.com/" name="facebook" value="<%=user.fb%>" type="text" class="form-control">
+                                    <h6>Twitter</h6>
+                                    <input placeholder="https://www.twitter.com/" name="twitter" value="<%=user.twitter%>" type="text" class="form-control">
+                                    <h6>Google</h6>
+                                    <input placeholder="https://www.google.com/" name="google" value="<%=user.google%>" type="text" class="form-control">
+                                    <input type="submit" class="btn btn-info mt-3 mb-5" value="Save Changes">
+                                
+                                 </div>
+                                </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <form action="/chnagepassword" method="POST"> 
+                                   <div class="user-pass">
+                                    <h6>Current Password</h6>
+                                    <input name="curpass" type="password" class="form-control">
+                                    <h6>New Password</h6>
+                                    <input type="password" class="form-control">
+                                    <h6>Confirm New Password</h6>
+                                    <input name="newpass1" type="password" class="form-control">
+                                    <input type="submit" class="btn btn-danger mt-3" value="Change Password">
+                                   </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+ <%- include('./include/script.ejs') %>
+
+</body>
+
+</html>

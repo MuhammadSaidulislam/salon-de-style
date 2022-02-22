@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+<head>
+
+	<title>
+		Salon De Style: <%=shopInfo.businessName%>
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="/css/user/css/style.css">
+	<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.carousel.css">
+	<link rel="stylesheet" href="/css/user/css/shop.css">
+</head>
+
+<body onload="setMap()">
+	<div id="loader"> </div>
+
+	<% if(user){ %>
+		<%- include('./loginNavbar.ejs') %>
+			<% } else{ %>
+				<%- include('./navbar.ejs') %>
+					<% } %>
+
+						<!-- Slider -->
+						<section class="page-content">
+							<section class="testimonials">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-sm-12">
+											<div id="customers-testimonials" class="owl-carousel">
+												<% for(let i=0; i<2; i++) { %>
+													<% if(shopInfo.img !="" ) { %>
+														<div class="item">
+															<div class="shadow-effect">
+																<img class="img-responsive" src="<%=shopInfo.img%>"
+																	alt="">
+															</div>
+														</div>
+														<% } %>
+															<% if(shopInfo.img1 !="" ) { %>
+																<div class="item">
+																	<div class="shadow-effect">
+																		<img class="img-responsive"
+																			src="<%=shopInfo.img1%>" alt="">
+																	</div>
+																</div>
+																<% } %>
+																	<% if(shopInfo.img2 !="" ) { %>
+																		<div class="item">
+																			<div class="shadow-effect">
+																				<img class="img-responsive"
+																					src="<%=shopInfo.img2%>" alt="">
+																			</div>
+																		</div>
+																		<% } %>
+																			<% if(shopInfo.img3 !="" ) { %>
+																				<div class="item">
+																					<div class="shadow-effect">
+																						<img class="img-responsive"
+																							src="<%=shopInfo.img3%>"
+																							alt="">
+																					</div>
+																				</div>
+																				<% } %>
+																					<% if(shopInfo.img4 !="" ) { %>
+																						<div class="item">
+																							<div class="shadow-effect">
+																								<img class="img-responsive"
+																									src="<%=shopInfo.img4%>"
+																									alt="">
+																							</div>
+																						</div>
+																						<% } %>
+
+																							<% } %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<input type="hidden" value="<%=shopInfo.lat%>" id="lat">
+							<input type="hidden" value="<%=shopInfo.lon%>" id="lon">
+							<input type="hidden" value="<%=shopInfo.address%>" id="address">
+
+
+
+							<section class="product-info">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-8">
+											<div class="shop-info">
+												<h3>
+													<%=shopInfo.businessName%> <span class="shopname"
+															style="font-size: 15px;">SALON DE
+															STYLE</span>
+												</h3>
+												<p><i class="fa fa-street-view"></i> Adress: <%=shopInfo.address%>
+												</p>
+												<div class="rating" data-rating="<%=avrgRating%>">
+													<div class="star"></div>
+													<div class="star"></div>
+													<div class="star"></div>
+													<div class="star"></div>
+													<div class="star"></div>
+													<span class="text-dark">(<%=totalRating%> reviews)</span>
+												</div>
+											</div>
+											<div class="service-nav-list">
+												<nav class="navbar navbar-expand-lg navbar-light bg-light">
+													<div class="" id="navbarNavAltMarkup">
+														<div class="navbar-nav">
+															<a class="nav-item nav-link active" href="#service">
+																<p>Service</p>
+															</a>
+															<a class="nav-item nav-link" href="#overview">
+																<p>Overview</p>
+															</a>
+															<a class="nav-item nav-link" href="#location">
+																<p>Location</p>
+															</a>
+															<a class="nav-item nav-link" href="#review">
+																<p>Review</p>
+															</a>
+															<a class="nav-item nav-link" href="#addreview">
+																<p>Add Review</p>
+															</a>
+														</div>
+													</div>
+												</nav>
+											</div>
+											<div id="service" class="service-list">
+												<h3>Service List</h3>
+												<hr>
+												<% for(i=0;i<service.length; i++){ %>
+													<div class="media">
+														<div class="media-body">
+															<h5 class="mt-0 mb-1">
+																<%=service[i].name%>
+															</h5>
+															<p>Price: <%=service[i].price%> (<%=service[i].hour%>
+																		<strong>h </strong>
+																		<%=service[i].min%><strong>min</strong>)</p>
+														</div>
+														<a href="/service/<%=shopInfo.businessMail%>/<%=service[i].name%>/<%=service[i].price%>"
+															class="btn btn-danger">book</a>
+													</div>
+													<% } %>
+											</div>
+											<div id="overview" class="overview-list">
+												<h3>Overview</h3>
+												<hr>
+												<div class="media">
+													<div class="media-body">
+														<h5 class="mt-0 mb-1">
+															<%=shopInfo.description%>
+														</h5>
+
+													</div>
+												</div>
+											</div>
+											<div id="location" class="location">
+												<h3>Location</h3>
+												<div id="maparea" style="width: 100%; height: 500px;"></div>
+											</div>
+											<div id="review" class="review-rating">
+												<div class="row">
+													<div class="col-md-12">
+														<h3>review(<%=totalRating%>)</h3>
+														<p>Reviews are no joke! Salon de Style values authentic reviews
+															and only verifies
+															them if we know the reviewer has visited this business. </p>
+													</div>
+													<div class="col-md-4 text-center border">
+														<h1>
+															<%=avrgRating%>
+														</h1>
+														<h4>Out of 5.0</h4>
+														<div class="rating" data-rating="<%=avrgRating%>">
+															<div class="star"></div>
+															<div class="star"></div>
+															<div class="star"></div>
+															<div class="star"></div>
+															<div class="star"></div>
+														</div>
+													</div>
+													<div class="col-md-4 border">
+														<div class="progress-result">
+															<div class="progress-number">
+																<p><span>5.0</span>
+																	<span><i class="fa fa-star"></i></span>
+																</p>
+															</div>
+															<div class="pro">
+																<div class="progress">
+																	<div class="progress-bar bg-danger"
+																		role="progressbar" style="width: 100%"
+																		aria-valuenow="100" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+															</div>
+															<div class="progress-value">
+																<p>
+																	<%=star5%>
+																</p>
+															</div>
+														</div>
+														<div class="progress-result">
+															<div class="progress-number">
+																<p><span>4.0</span>
+																	<span><i class="fa fa-star"></i></span>
+																</p>
+															</div>
+															<div class="pro">
+																<div class="progress">
+																	<div class="progress-bar bg-danger"
+																		role="progressbar" style="width: 100%"
+																		aria-valuenow="100" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+															</div>
+															<div class="progress-value">
+																<p>
+																	<%=star4%>
+																</p>
+															</div>
+														</div>
+														<div class="progress-result">
+															<div class="progress-number">
+																<p><span>3.0</span>
+																	<span><i class="fa fa-star"></i></span>
+																</p>
+															</div>
+															<div class="pro">
+																<div class="progress">
+																	<div class="progress-bar bg-danger"
+																		role="progressbar" style="width: 100%"
+																		aria-valuenow="100" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+															</div>
+															<div class="progress-value">
+																<p>
+																	<%=star3%>
+																</p>
+															</div>
+														</div>
+
+													</div>
+													<div class="col-md-4 border">
+														<div class="progress-result">
+															<div class="progress-number">
+																<p><span>2.0</span>
+																	<span><i class="fa fa-star"></i></span>
+																</p>
+															</div>
+															<div class="pro">
+																<div class="progress">
+																	<div class="progress-bar bg-danger"
+																		role="progressbar" style="width: 100%"
+																		aria-valuenow="100" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+															</div>
+															<div class="progress-value">
+																<p>
+																	<%=star2%>
+																</p>
+															</div>
+														</div>
+														<div class="progress-result">
+															<div class="progress-number">
+																<p><span>1.0</span>
+																	<span><i class="fa fa-star"></i></span>
+																</p>
+															</div>
+															<div class="pro">
+																<div class="progress">
+																	<div class="progress-bar bg-danger"
+																		role="progressbar" style="width: 100%"
+																		aria-valuenow="100" aria-valuemin="0"
+																		aria-valuemax="100"></div>
+																</div>
+															</div>
+															<div class="progress-value">
+																<p>
+																	<%=star1%>
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="review-show">
+												<% if(totalRating> 0) { %>
+
+													<% for( let j=0;j<allRating.length;j++ ) { %>
+														<div class="media">
+															<div class="media-body">
+																<div class="review-user mr-3">
+																	<img src="<%=allRating[j].reviewrDP%>" alt=""
+																		width="80px" height="80px">
+																</div>
+																<div class="review-name ml-5">
+																	<h5 class="mt-0 mb-1">
+																		<%=allRating[j].reviewrName%>
+																	</h5>
+																	<p>
+																		<%=allRating[j].date%>
+																	</p>
+																</div>
+																<h6>
+																	<%=allRating[j].review%>
+																</h6>
+																<img src="<%=allRating[j].img%>" alt=""
+																	class="reviewPicShow">
+															</div>
+															<div class="rating" data-rating="<%=allRating[j].rating%>">
+																<div class="star"></div>
+																<div class="star"></div>
+																<div class="star"></div>
+																<div class="star"></div>
+																<div class="star"></div>
+															</div>
+
+														</div>
+														<% } %>
+															<% } %>
+											</div>
+											<div id="addreview" class="add-review">
+												<h3>Add your review</h3>
+												<hr>
+												<p>Your mail address will not be published</p>
+												<form action="/setReview" method="post" id="add-comment"
+													class="add-comment" enctype="multipart/form-data">
+													<input type="hidden" name="shop" value="<%=shopInfo.businessMail%>">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="add-review-box">
+																<h4>Service</h4>
+																<div class="sub-rating-stars">
+																	<!-- Leave Rating -->
+																	<div class="leave-rating">
+																		<input type="radio" name="rating" id="rating-1"
+																			value="5" />
+																		<label for="rating-1"
+																			class="fa fa-star"></label>
+																		<input type="radio" name="rating" id="rating-2"
+																			value="4" />
+																		<label for="rating-2"
+																			class="fa fa-star"></label>
+																		<input type="radio" name="rating" id="rating-3"
+																			value="3" />
+																		<label for="rating-3"
+																			class="fa fa-star"></label>
+																		<input type="radio" name="rating" id="rating-4"
+																			value="2" />
+																		<label for="rating-4"
+																			class="fa fa-star"></label>
+																		<input type="radio" name="rating" id="rating-5"
+																			value="1" />
+																		<label for="rating-5"
+																			class="fa fa-star"></label>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+														<div class="col-md-12">
+
+															<div class="uploadreviewpic">
+																<input class="reviewPic" type="file" name="image"
+																	id="upload" multiple>
+															</div>
+															<textarea name="riview" class="reviewTextarea"></textarea>
+															<input type="submit" class="btn btn-danger reviewSubmit"
+																value="Submit review">
+														</div>
+													</div>
+											</div>
+										</div>
+
+										<div class="col-lg-4 col-md-4 margin-top-75 sticky">
+
+											<div class="package-show text-center">
+												<% if(gift.length> 0) { %>
+													<h5 class="text-center text-info">Show Package</h5>
+													<a data-toggle="modal" data-target="#packageModal"
+														class="btn btn-danger">Show Package</a>
+
+													<div class="modal fade" id="packageModal" tabindex="-1"
+														role="dialog" aria-labelledby="exampleModalLabel"
+														aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="exampleModalLabel">
+																		Package</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<% for(let i=0;i<gift.length;i++){ %>
+																		<form action="/order/package/<%=gift[i].token%>"
+																			method="post">
+																			<div class="packageShow">
+
+																				<h3>Package Name:
+																					<%=gift[i].packageName%>
+																				</h3>
+																				<h4>Price: <%=gift[i].price%>.00</h4>
+																				<button type="submit"
+																					class="btn btn-danger">Order</button>
+
+																			</div>
+																		</form>
+																		<% } %>
+																</div>
+															</div>
+														</div>
+													</div>
+													<% } %>
+											</div>
+											<div class="opening-time">
+												<div class="row">
+													<div class="col-md-12 mb-2">
+														<h2 class="text-danger text-center"><i
+																class="fa fa-clock"></i>Opening Hours</h2>
+														<hr>
+													</div>
+													<div class="col-md-4">
+														<p>Saturday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(sat.length){ %>
+															<% for(i=0;i<sat.length;i++) { %>
+																<p>
+																	<%=sat[i].open%> AM - <%=sat[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+
+													<div class="col-md-4">
+														<p>Sunday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(sun.length){ %>
+															<% for(i=0;i<sun.length;i++) { %>
+																<p>
+																	<%=sun[i].open%> AM - <%=sun[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+
+													<div class="col-md-4">
+														<p>Monday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(mon.length){ %>
+															<% for(i=0;i<mon.length;i++) { %>
+																<p>
+																	<%=mon[i].open%> AM - <%=mon[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p>Close</p>
+																		<% } %>
+													</div>
+													<div class="col-md-4">
+														<p>Tuesday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(tue.length){ %>
+															<% for(i=0;i<tue.length;i++) { %>
+																<p>
+																	<%=tue[i].open%> AM - <%=tue[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+
+													<div class="col-md-4">
+														<p>Wednesday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(wed.length){ %>
+															<% for(i=0;i<wed.length;i++) { %>
+																<p>
+																	<%=wed[i].open%> AM - <%=wed[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+													<div class="col-md-4">
+														<p>Thrusday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(thu.length){ %>
+															<% for(i=0;i<thu.length;i++) { %>
+																<p>
+																	<%=thu[i].open%> AM - <%=thu[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+													<div class="col-md-4">
+														<p>Friday</p>
+													</div>
+													<div class="col-md-8">
+														<% if(fri.length){ %>
+															<% for(i=0;i<fri.length;i++) { %>
+																<p>
+																	<%=fri[i].open%> AM - <%=fri[i].close%> PM
+																</p>
+																<% } %>
+																	<% } else { %>
+																		<p><span>Close</span></p>
+																		<% } %>
+													</div>
+												</div>
+											</div>
+											<div class="contact-info">
+												<h3>Contact Information</h3>
+												<hr>
+												<a href="" class="text-dark"><i class="fa fa-phone mr-2"></i>
+													<%=shopInfo.businessNumber%>
+												</a>
+												<a href="" class="text-danger"><i class="fa fa-envelope mr-2"></i>
+													Email</a>
+												<a href="" class="text-primary"><i class="fa fa-facebook mr-2"></i>
+													Facebook</a>
+												<a href="" class="text-info"><i class="fa fa-twitter mr-2"></i>
+													Twitter</a>
+											</div>
+											<div class="policy">
+												<h2 class="text-center">Heath Policy & Report</h2>
+												<a data-toggle="modal" data-target="#reportModalLong"
+													class="report">Report</a>
+												<a data-toggle="modal" data-target="#healthModalCenter"
+													class="health"><i class="fa fa-notes-medical"></i>Heath Rules</a>
+
+												<!-- report popup -->
+												<div class="modal fade" id="reportModalLong" tabindex="-1" role="dialog"
+													aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLongTitle">Modal
+																	title</h5>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<form action="/report/<%=shopInfo.businessMail%>"
+																	method="post">
+
+																	<div class="report10">
+																		<input class="material-inputs" type="checkbox"
+																			name="SexualContent" value="Sexual content"
+																			id="one">
+																		<label for="one">Sexual content</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs" type="checkbox"
+																			name="ViolentorRepulsiveContent"
+																			value="Violent or repulsive content"
+																			id="two">
+																		<label for="two">Violent or repulsive
+																			content</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs" type="checkbox"
+																			name="HatefulorAbusiveContent"
+																			value="Hateful or abusive content"
+																			id="three">
+																		<label for="three">Hateful or abusive
+																			content</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs" type="checkbox"
+																			name="HarmfulDangerousActs"
+																			value="Harmful dangerous acts" id="five">
+																		<label for="five">Harmful dangerous acts</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs" type="checkbox"
+																			name="ChildAbuse" value="Child abuse"
+																			id="six">
+																		<label for="six">Child abuse</label>
+																	</div>
+
+																	<div class="report10">
+																		<input class="material-inputs"
+																			name="InfringesMyRights"
+																			value="Infringes my rights" type="checkbox"
+																			id="seven">
+																		<label for="seven">Infringes my rights</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs"
+																			name="PromotesTerrorism"
+																			value="Promotes terrorism" type="checkbox"
+																			id="eight">
+																		<label for="eight">Promotes terrorism</label>
+																	</div>
+																	<div class="report10">
+																		<input class="material-inputs"
+																			name="SpamorMisleading"
+																			value="Spam or misleading" type="checkbox"
+																			id="nine">
+																		<label for="nine">Spam or misleading</label>
+																	</div>
+
+
+																	<div class="modal-footer">
+																		<button type="submit"
+																			class="btn btn-success save-report btn-lg">Report</button>
+																	</div>
+																</form>
+															</div>
+
+														</div>
+													</div>
+												</div>
+
+												<div class="modal fade" id="healthModalCenter" tabindex="-1"
+													role="dialog" aria-labelledby="exampleModalLongTitle"
+													aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLongTitle">Modal
+																	title</h5>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<% for(j=0;j<health.length;j++){ %>
+																	<h6><span><i
+																				class="fa fa-briefcase-medical"></i></span>
+																		<%=health[j]%>
+																	</h6>
+																	<% } %>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+							</section>
+						</section>
+
+						<!-- Footer -->
+						<%- include('./footer.ejs') %>
+						<!-- Footer -->
+
+							<script type="text/javascript" src="/js/user/scripts/jquery-3.4.1.min.js"></script>
+							<script
+								src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUJfIu3uSSh5QOT5nRZ0gEbeGONrY3pgQ&libraries=places&callback=initAutocomplete"></script>
+							<script src="/js/user/owl.js"></script>
+							<script src="/js/user/map.js"></script>
+							<script src="/js/user/eachPage/shop.js"></script>
+
+
+</body>
+
+</html>

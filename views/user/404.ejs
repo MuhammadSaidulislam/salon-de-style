@@ -1,0 +1,33 @@
+<%- include('./include/header.ejs') %>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	</head>
+
+	<body  onload="loader()">
+		<div id="loader"> </div>
+		<%- include('./navbar.ejs') %>
+
+			<!-- Container -->
+			<section class="page-content">
+
+				<div class="container" style="margin-top: 150px; margin-bottom: 300px;">
+					<div class="row">
+						<div class="col-md-12 text-center">
+
+							<section id="not-found" class="center">
+								<h1 style="font-size: 50px;">404 <i class="fa fa-question-circle"></i></h1>
+								<h4>We're sorry, but the page you were looking for doesn't exist.</h4>
+							</section>
+
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Footer -->
+			<%- include('./footer.ejs') %>
+				<!-- Footer -->
+
+	</body>
+
+	</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+
+<title>Salon De Style</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="/css/user/css/style.css">
+<link rel="stylesheet" href="/css/user/css/main-color.css" id="colors">
+
+</head>
+
+<body onload="loader()">
+	<div id="loader"> </div>
+			<!-- Header -->	
+			<% if(user){ %>
+				<%- include('./loginNavbar.ejs') %>
+			  <% } else{ %>
+				<%- include('./navbar.ejs') %>
+			  <% }  %>
+			<!-- Header / End -->
+	<!-- side Navbar -->
+	<%- include('./sideNavbar.ejs') %>
+	<!-- side Navbar -->
+
+	<div class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="privacy">
+					<h2>Terms of Service</h2>
+					<hr>
+					<h5>This privacy policy (this “Policy”) explains how personal information is collected, used, and disclosed by Booksy Holdings, Inc. with its registered office in the State of and all its designated agents, employees and subsidiaries (“Booksy” or “we”). This Policy applies to consumer users (individually referred to as “you”) of Booksy’s websites, applications, and other online services (collectively, our “Sites”). </h5>
+					<h5>Other third parties, such as small and medium businesses (“SMBs”) at which you make reservations through our Sites, issuers of Merchant Gift Cards you purchase through our Sites, and social networks that you use in connection with our Sites, may also collect, use, and share information about you. This Policy does not cover such third parties or their services. For information about third-party privacy practices, please consult with them directly. </h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+</section>
+
+<%- include('./include/script.ejs') %>
+
+</body>
+</html>

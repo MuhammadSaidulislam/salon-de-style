@@ -1,0 +1,83 @@
+<%- include('./include/header.ejs') %>
+</head>
+
+<body  onload="loader()">
+	<div id="loader"> </div>
+	<% if(user){ %>
+		<%- include('./loginNavbar.ejs') %>
+			<% } else{ %>
+				<%- include('./navbar.ejs') %>
+					<% } %>
+						<!-- Header / End -->
+						<!-- side Navbar -->
+						<%- include('./sideNavbar.ejs') %>
+							<!-- side Navbar -->
+
+							<div class="content">
+								<div class="row">
+									<div class="col-md-12">
+										<h3>E-gift Card List</h3>
+										<hr>
+									</div>
+									<div class="col-md-12">
+										<% if(gift.length) { %>
+											<ul class="list-group">
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center">
+													<h5>E-gift Card Name: <%=gift[i].packageName%>
+													</h5>
+													<span class="badge-pill">Offer Price: $ <%=gift[i].price%></span>
+												</li>
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center">
+													<h5>Shop Name: <%=gift[i].businessName%>
+													</h5>
+													<span class="badge-pill"><a
+															href="/details/<%=gift[i].businessName%>/<%=gift[i].businessMail%>">View
+															shop</a></span>
+												</li>
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center">
+													<h5>Service: <%=gift[i].service%>
+													</h5>
+													<span class="badge-pill">
+														<% if(gift[i].status==0) { %>
+															Available
+															<% } else if(gift[i].status==1) { %>
+																Used
+																<% } else { %>
+																	Cancled
+																	<% } %>
+													</span>
+												</li>
+												<li
+													class="list-group-item d-flex justify-content-between align-items-center">
+													<p>Booking Date: <%=gift[i].date%>
+													</p>
+													<p>Valid Till: <%=gift[i].endDate%>
+													</p>
+													<span class="badge-pill"> Token: #<%=gift[i].token%> </span>
+												</li>
+											</ul>
+											<% } else{ %>
+												<div class="container">
+													<div class="row">
+														<div class="col-md-12">
+															<h3 class="text-center">No Data Found</h3>
+														</div>
+													</div>
+												</div>
+												<% } %>
+									</div>
+								</div>
+							</div>
+							</div>
+							</div>
+
+							</section>
+
+<%- include('./include/script.ejs') %>
+
+</body>
+
+</html>
